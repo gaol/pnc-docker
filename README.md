@@ -36,8 +36,8 @@ The pnc-config.json:
         "configs":[
           {
             "@module-config":"jenkins-build-driver",
-            "username":"jenkins",
-            "password":"jenkins"
+            "username":"pnc-system-user",
+            "password":"changeme"
           },
           {
             "@module-config":"maven-repo-driver",
@@ -46,10 +46,10 @@ The pnc-config.json:
           {
             "@module-config":"docker-environment-driver",
             "ip":"172.17.42.1",
-            "inContainerUser":"jenkins",
-            "inContainerUserPassword":"jenkins",
-            "dockerImageId":"pnc-builder-0.3:1",
-            "firewallAllowedDestinations":"192.30.252.131:80"
+            "inContainerUser":"root",
+            "inContainerUserPassword":"changeme",
+            "dockerImageId":"mareknovotny/pnc-jenkins:v0.3",
+            "firewallAllowedDestinations":"172.17.42.1"
           }
         ]
 }
@@ -99,11 +99,12 @@ The pnc-config.json:
 ## Command to start the container
 
 Assume your pnc ear is located at: `/opt/pnc/deployments/` in the docker host,
+and the config files above are located at: `/opt/pnc/config/` in the docker host,
 then using following arguments to pass into the docker contaniner:
 
-`docker run -d --name=pnc-docker -p 8080:8080 -p 8090:8090 -p 5432:5432 -v /opt/pnc/deployments/:/mnt/deployments/ -v /opt/pnc/config:/mnt/config aoingl/pnc-docker`
+`docker run -d --name=pnc-docker -p 8080:8080 -v /opt/pnc/deployments/:/mnt/deployments/ -v /opt/pnc/config:/mnt/config aoingl/pnc-docker`
 
 
 > Remember to copy the configuration files above into `/opt/pnc/config/pnc-config.json` and `/opt/pnc/config/job-template.xml`
 
-This will redirect the host port to container.
+Then you can visit the pnc project at: `http://127.0.0.1:8080/pnc-web/`
