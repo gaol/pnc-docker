@@ -23,8 +23,8 @@ RUN unzip -q -d /opt/ aprox.zip
 # aprox configurations
 ADD aprox-etc.zip /opt/
 ADD aprox-data.zip /opt/
-RUN unzip -d /opt/aprox/etc/aprox/ /opt/aprox-etc.zip
-RUN unzip -d /opt/aprox/var/lib/aprox/data/ /opt/aprox-data.zip
+RUN unzip -d /opt/aprox/etc/aprox/ -o /opt/aprox-etc.zip
+RUN unzip -d /opt/aprox/var/lib/aprox/data/ -o /opt/aprox-data.zip
 
 RUN chown -R jboss.jboss /opt/
 
