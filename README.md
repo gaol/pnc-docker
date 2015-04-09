@@ -13,11 +13,8 @@ It can be easily used to deploy the [pnc](https://github.com/project-ncl/pnc) ea
 
 ## Command to start the container
 
-Assume your pnc ear is located at: `/opt/pnc/deployments/` in the docker host,
-and the config files above are located at: `/opt/pnc/config/` in the docker host,
-then using following arguments to pass into the docker contaniner:
-
 `docker pull mareknovotny/pnc-jenkins:v0.3`
+
 `docker run -d --name=pnc-docker-local -p 8080:8080 aoingl/pnc-docker:postbuild`
 
 Then you can visit the pnc project at: `http://127.0.0.1:8080/pnc-web/`

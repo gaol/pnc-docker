@@ -22,9 +22,12 @@ RUN unzip -q -d /opt/ aprox.zip
 
 # aprox configurations
 ADD aprox-etc.zip /opt/
-ADD aprox-data.zip /opt/
 RUN unzip -d /opt/aprox/etc/aprox/ -o /opt/aprox-etc.zip
-RUN unzip -d /opt/aprox/var/lib/aprox/data/ -o /opt/aprox-data.zip
+#ADD aprox-data.zip /opt/
+#RUN unzip -d /opt/aprox/var/lib/aprox/data/ -o /opt/aprox-data.zip
+
+ADD pnc-config.json /opt/
+RUN echo "JAVA_OPTS=\"\$JAVA_OPTS -Dpnc-config-file=/opt/pnc-config.json\"" >> /opt/jboss/wildfly/bin/standalone.conf
 
 RUN chown -R jboss.jboss /opt/
 
